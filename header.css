@@ -1,0 +1,33 @@
+
+header{
+  display: flex;
+  padding: 2em;
+  justify-content: space-between;
+  width: 100%;
+  background-color: cadetblue;
+}
+header h1{
+  margin: auto;
+  color: azure;
+}
+header ul{
+  display: flex;
+  margin: auto;
+  list-style-type: none;
+  justify-content: space-between;
+}
+header li{
+  margin: 1em;
+  font-size: 1em; 
+}
+header li a{
+  text-decoration: none;
+  color: azure;
+  font-weight: 600;
+  padding: 0.5em;
+  transition: color 0.3s, background-color 0.3s;
+}
+header li a:hover{
+  background-color: rebeccapurple;
+  color: azure;
+}
