@@ -1,0 +1,21 @@
+.elementBox{
+  /* padding: 1em; */
+  background-color: azure;
+  border: none;
+  border-radius: 1em;
+  border-top-left-radius: 0em;
+}
+.optionList{
+  list-style: none;
+}
+.optionList li, .optionList a{
+  text-decoration: none;
+  color: azure;
+  margin-top: 0.8em;
+  font-size: 1em;
+  text-align: center;
+  padding: 0.4em;
+  font-weight: 600;
+  border-radius: 1em;
+  background-color: rgb(99, 159, 161);
+}
