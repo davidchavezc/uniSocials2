@@ -1,14 +1,23 @@
 
 header{
   display: flex;
-  padding: 2em;
+  padding: 1em 1.5em 1em 1.5em;
+  padding-right: 0px;
   justify-content: space-between;
   width: 100%;
+  height: auto;
   background-color: cadetblue;
 }
 header h1{
   margin: auto;
+}
+header h1 a{
+  /* margin: auto; */
   color: azure;
+  text-decoration: none;
+}
+header h1:hover{
+  cursor: pointer;
 }
 header ul{
   display: flex;
