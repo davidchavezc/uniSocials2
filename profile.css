@@ -1,0 +1,39 @@
+.profileBanner{
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em; 
+  border: rgba(71, 99, 100, 0.573) 0.3em solid;
+}
+.roundie{
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+
+}
+.profilePicture{
+  box-shadow: 0px 0px 0.5em #424242;
+  border-radius: 20em;
+  /* margin: 0px; */
+  position: relative;
+  bottom: 100px;
+  border: rgb(231, 231, 231) 0.3em solid;
+}
+.displayName{
+  color: rgb(37, 37, 37);
+  font-weight: 600;
+}
+.profileBio{
+  font-size: 1.5em;
+  font-weight: 400;
+  color: rgb(67, 78, 90);
+}
+.coolhover:hover{
+  background-color: rebeccapurple;
+  width: fit-content;
+  color: azure;
+  cursor: pointer;
+}
+button:hover{
+  background-color: rgb(143, 201, 202);
+}
+.whitey{
+  background-color: rgb(202, 228, 229);
+}
