@@ -1,5 +1,4 @@
 #mainContainer{
-  display: flex;
   padding: 1em;
 }
 
@@ -7,10 +6,16 @@
   background-color: rgba(128, 181, 183, 0.386);
   height: auto;
   padding: 1em;
-  padding-bottom: 2em;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   border-radius: 1em;
+  margin-bottom: 1em;
+}
+#navigator{
+  background-color: rgba(128, 181, 183, 0.386);
+  padding: 1em;
+  border-radius: 1em;
+  height: auto; 
 }
 #composeContainer span{
   background-color: rgb(79, 131, 132);
@@ -23,7 +28,7 @@
   border-top-left-radius: 1em;
   width: fit-content;
 }
-#composeBox{
+#composeContainer textarea{
   padding: 1em;
   border: none;
   border-radius: 1em;
@@ -40,4 +45,23 @@
 }
 textarea:focus, input:focus{
   outline: none;
+}
+#composeContainer button{
+  background-color:rgb(82, 159, 161);
+  color: white;
+  font-weight: 500;
+  padding: 0.1em 1em;
+  font-size: 1.2em;
+  /* line-height: 1.5em; */
+  border-radius: 1em;
+  /* outline: none; */
+  border: none;
+  margin: 0.5em 0px 0px auto; 
+  text-align: center;
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+#composeContainer button:active{
+  box-shadow: inset 0px 0px 0.2em rgba(0, 0, 0, 0.666);
+  background-color: rgb(10, 128, 130);
+  /* font-size: 1.1em; */
 }
