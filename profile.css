@@ -4,8 +4,8 @@
   border: rgba(71, 99, 100, 0.573) 0.3em solid;
 }
 .roundie{
-  border-top-left-radius: 2em;
-  border-top-right-radius: 2em;
+  border-top-left-radius: 1em !important;
+  border-top-right-radius: 1em !important;
 
 }
 .profilePicture{
