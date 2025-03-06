@@ -1,8 +1,3 @@
-<!-- Pagina principal 
- 1. Pantalla de inicio: (Valor 15%) 
-a. Mostrar las publicaciones recientes. (AJAX) (UT 1) 
-b. Mostrar una sección con un cuadro de texto para crear publicaciones. (UT 2)  -->
-
 <!doctype html>
 <html lang="es-mx">
   <head>
@@ -19,7 +14,7 @@ b. Mostrar una sección con un cuadro de texto para crear publicaciones. (UT 2) 
     <header class="nav">
         <h1><a href="#">UniSocials</a></h1>
         <ul>
-          <li><a href="#">Inicio</a></li>
+          <li><a href="index.html">Inicio</a></li>
           <li><a href="perfil.html">Perfil</a></li>
           <li><a href="favoritos.html">Favoritos</a></li>
         </ul>
@@ -27,40 +22,25 @@ b. Mostrar una sección con un cuadro de texto para crear publicaciones. (UT 2) 
       <div class="row p-3">
         <main class="col-md-9">
           <article class="d-flex composeContainer">
-            <span>Publicar</span>
-            <textarea placeholder="Escribe lo que tengas en mente..." id="composeBox"></textarea>
-            <button id="sendPost">Enviar <i class="bi bi-send-fill"></i></button>
-          </article>
-          <article class="d-flex composeContainer">
-            <span>Rodolfo Leija</span>
-            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto hic eaque nisi optio nihil tempora earum libero. Itaque accusamus est, natus debitis dolorem iste labore rerum necessitatibus, amet minus nisi.</p>
-            <section class=" ms-auto">
-              <button class="starPost">12 <i class=" starIcon bi bi-star"></i></button>
-              <button class="commentPost"><a href="publicacion.html">2 <i class="commentIcon bi bi-chat"></a></i></button>
-            </section>
-          </article>
-          <article class="d-flex composeContainer">
             <span>Nestor García</span>
             <p class="mb-0">¿Realmente es necesario usar Bootstrap? La verdad yo pienso que sí, ¡No quiero volver a utilizar css vanilla nunca más!</p>
             <section class=" ms-auto">
               <button class="starPost"><i class=" starIcon bi bi-star"></i></button>
               <button class="commentPost"><a href="publicacion0.html">0 <i class="commentIcon bi bi-chat"></a></i></button>
             </section>
-          </article>
-          <article class="d-flex composeContainer">
-            <span>Diego Durán</span>
-            <p class="mb-0">Me encanta Bootstrap, es una de las mejores herramientas para programar</p>
-            <section class=" ms-auto">
-              <button class="starPost"><i class=" starIcon bi bi-star"></i></button>
-              <button class="commentPost"><a href="publicacion1.html">1 <i class="commentIcon bi bi-chat"></a></i></button>
+            <section class="d-flex composeContainer mini">
+              <span>Comentar</span>
+              <textarea placeholder="Escribe lo que tengas en mente..." id="composeBox"></textarea>
+              <button id="sendPost">Enviar <i class="bi bi-send-fill"></i></button>
             </section>
           </article>
+            </article>
         </main>
         <div class="col-md-3 p-0">
           <nav class="d-flex composeContainer">
             <span>Opciones</span>
             <ul class="elementBox p-3 optionList">
-              <li><a href="#">Inicio <i class="bi bi-house-door-fill"></i></a></li>
+              <li><a href="index.html">Inicio <i class="bi bi-house-door-fill"></i></a></li>
               <li><a href="perfil.html">Mi perfil <i class="bi bi-person-circle"></i></a></li>
               <li><a href="favoritos.html">Favoritos <i class="bi bi-star-fill"></i></a></li>
             </ul>

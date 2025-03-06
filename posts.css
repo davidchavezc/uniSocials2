@@ -33,9 +33,14 @@
   border-radius: 1em;
   border-top-left-radius: 0em;
   transition: box-shadow 0.3s;
-  /* overflow-y: visible; */
   field-sizing: content;
   resize: none;
+}
+.composeContainer p{
+  padding: 1em;
+  background-color: azure;
+  border-radius: 1em;
+  border-top-left-radius: 0em;
 }
 #composeBox:focus{
   border: none;
@@ -64,4 +69,13 @@ textarea:focus, input:focus{
   box-shadow: inset 0px 0px 0.2em rgba(0, 0, 0, 0.666);
   background-color: rgb(10, 128, 130);
   /* font-size: 1.1em; */
+}
+.mini{
+  margin: 0.5em 0px 0px 2em;  
+  padding: 0px;
+  background: none;
+}
+.commentPost a{
+  text-decoration: none;
+  color: azure;
 }
