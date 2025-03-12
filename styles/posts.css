@@ -42,6 +42,9 @@
   border-radius: 1em;
   border-top-left-radius: 0em;
 }
+main .composeContainer p{
+  font-size: 1.2em;
+}
 #composeBox:focus{
   border: none;
   background-color: rgb(255, 255, 243);
@@ -78,4 +81,12 @@ textarea:focus, input:focus{
 .commentPost a{
   text-decoration: none;
   color: azure;
+}
+img{
+  width: 200px;
+  height: auto;
+}
+
+.deletePost, .editPost{
+  margin: 0px 5px;
 }
