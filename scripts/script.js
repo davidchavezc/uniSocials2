@@ -334,10 +334,14 @@ function getComments(postId){
     crossDomain: 'true',
   }).done(function (result){
     $(result).each(function(index, comment){
-      let commentHTML = `<section class="d-flex composeContainer mini">
+      let commentHTML = `<section class="d-flex composeContainer mini comment" commentId="${comment.idComentario}">
               <span>${comment.nombre}</span>
               <p class="mb-0">${comment.contenido}</p>
-              <button class="starPost">${comment.cantidadLikes} <i class=" starIcon bi bi-star"></i></button>
+              <section class="ms-auto">
+              ${comment.idUsuario == matricula ? `<button class="editComment"><i class="editIcon bi bi-pencil"></i></button>
+                <button class="deleteComment"><i class="removeIcon bi bi-trash"></i></button>` : ''}
+                <button class="starPost">${comment.cantidadLikes} <i class=" starIcon bi bi-star"></i></button>
+              </section>
             </section>`
       $('main').children('article').append(commentHTML);
     })
@@ -371,6 +375,74 @@ function getPost(postId){
       `;
       $('main').append(postHtml);
     })
+  })
+}
+
+// Modificar comentario
+function changeComment(idComentario, contenido){
+  console.log(idComentario, contenido)
+  $.ajax({
+    url: url + '/Comentarios/' + idComentario,
+    type: 'PUT',
+    dataType: 'json',
+    contentType: 'application/json',
+    crossDomain: true,
+    data: JSON.stringify({
+      idComentario: idComentario,
+      idPublicacion: 0,
+      idUsuario: matricula,
+      llave_Secreta: apiKey,
+      contenido: contenido
+    })
+  }).done(function(index, comment){
+    console.log(`Comentario ${comment.idComentario} modificado exitosamente!`);
+    Swal.fire({
+      title: 'Comentario cambiado',
+      text: 'Cambiaste tu comentario con éxito',
+      icon: 'success'
+    })
+     $('main').children().remove();
+     getPost(postId);
+     getComments(postId);
+   }).fail(function(jqXHR, errorStatus, errorMsg){
+     console.log(`${errorStatus} Error: ${errorMsg}`);
+     Swal.fire({
+       title: 'Algo salió mal',
+       text: 'No pudimos cambiar el comentario',
+       icon: 'error'
+     })
+   })
+ }
+
+//  Borrar comentario
+function deleteComment(commentId){
+  $.ajax({
+    url: url + '/Comentarios/' + commentId,
+    type: 'DELETE',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      idComentario: commentId,
+      idPublicacion: 0,
+      idUsuario: matricula,
+      llave_Secreta: apiKey,
+      contenido: ''
+    })
+  }).done(function(){
+    $('.comment[commentId=' + commentId + ']').remove()
+    Swal.fire({
+      title: 'Comentario eliminado',
+      text: 'Tu comentario se elimino exitosamente',
+      icon: 'success'
+    })
+    return true;
+  }).fail(function(jqXHR, errorStatus, errorMsg){
+    console.log(`${errorStatus} Error: ${errorMsg}`);
+     Swal.fire({
+       title: 'Algo salió mal',
+       text: 'No pudimos eliminar el comentario',
+       icon: 'error'
+     })
   })
 }
 
