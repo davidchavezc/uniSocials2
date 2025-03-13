@@ -276,6 +276,9 @@ function getMyPosts(){
   });
 }
 
+
+// Borrar un post 
+
 function deletePost(postId){
   $.ajax({
     url: url + '/Publicaciones/' + postId,
@@ -320,6 +323,8 @@ function getPostId() {
   return params['postId'] ? parseInt(params['postId'], 10) : null;
 }
 
+// Obtener los comentarios de un post con su ID
+
 function getComments(postId){
   $.ajax({
     url: url + '/Comentarios/Publicacion/'+ matricula + '/' + postId,
@@ -339,7 +344,7 @@ function getComments(postId){
     $('main').children('article').append(postCommentHTML);
   })
 }
-
+// Obtener un post espeifico
 function getPost(postId){
   $.ajax({
     url: url + '/Publicaciones/' + matricula + '/' + postId,
