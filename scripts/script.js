@@ -1,7 +1,7 @@
 var matricula = 2177862;
 var apiKey = "43de612c-3ab2-4c5e-9695-89660336460a";
 var url = 'https://redsocial.luislepe.tech/api';
-
+moment.locale('es-MX');  
 // Obtener posts
 function getPosts(){
   $.ajax({
@@ -13,12 +13,15 @@ function getPosts(){
     $(result).each(function(index, post) {
       var postHtml = `
       <article class="d-flex composeContainer" postID="${post.idPublicacion}" idUsuario="${post.idUsuario}">
+      <div class='d-flex'>
       <span>${post.nombre}</span>
+      <datetime class='ms-auto'>${moment(post.fechaCreacion).calendar()}</datetime>
+      </div>
       <p class="mb-0">${post.contenido}</p>
       <section class="ms-auto gap-3">
       ${post.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
         <button class="deletePost"><i class="removeIcon bi bi-trash"></i></button>` : ''}
-        <button class="starPost">${post.cantidadLikes} <i class="starIcon bi bi-star"></i></button>
+        <button class="starPost">${post.cantidadLikes} <i class="${post.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
       <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
       </section>
       </article>
@@ -145,7 +148,9 @@ function commentPost(postId, comentario){
     })
   }).done(function() {
     console.log("Comentario creado correctamente");
-    reloadPosts();
+    $('main').children().remove(),
+    getPost(postId);
+    getComments(postId);
   });
 }
 
@@ -225,13 +230,15 @@ function getMyPosts(){
     $(result).each(function(index, post) {
       var postHtml = `
       <article class="d-flex composeContainer" postID="${post.idPublicacion}" idUsuario="${post.idUsuario}">
+      <div class='d-flex'>
       <span>${post.nombre}</span>
+      <datetime class='ms-auto'>${moment(post.fechaCreacion).calendar()}</datetime>
+      </div>
       <p class="mb-0">${post.contenido}</p>
-      <datetime class="me-3">${moment(post.fechaCreacion).subtract(6, 'days').calendar()}</datetime>
-      <section class="ms-auto">
+      <section class="ms-auto gap-3">
       ${post.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
         <button class="deletePost"><i class="removeIcon bi bi-trash"></i></button>` : ''}
-      <button class="starPost">${post.cantidadLikes} <i class="starIcon bi bi-star"></i></button>
+        <button class="starPost">${post.cantidadLikes} <i class="${post.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
       <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
       </section>
       </article>
@@ -344,13 +351,16 @@ function getPost(postId){
     $(result).each(function(index, post){
       var postHtml = `
       <article class="d-flex composeContainer" postID="${post.idPublicacion}" idUsuario="${post.idUsuario}">
+      <div class='d-flex'>
       <span>${post.nombre}</span>
+      <datetime class='ms-auto'>${moment(post.fechaCreacion).calendar()}</datetime>
+      </div>
       <p class="mb-0">${post.contenido}</p>
       <section class="ms-auto gap-3">
       ${post.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
         <button class="deletePost"><i class="removeIcon bi bi-trash"></i></button>` : ''}
-        <button class="starPost">${post.cantidadLikes} <i class="starIcon bi bi-star"></i></button>
-      <button class="commentPost">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></i></button>
+        <button class="starPost">${post.cantidadLikes} <i class="${post.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
+      <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
       </section>
       </article>
       `;
@@ -359,6 +369,7 @@ function getPost(postId){
   })
 }
 
+// Plantillas
 
 var bioHTML = `<div class="profile-section composeContainer whitey">
   <div class="card roundie">
