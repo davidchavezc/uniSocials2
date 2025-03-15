@@ -30,7 +30,8 @@ $('main').on('click','.deletePost', function(){
 var postID = $(this).closest('article').attr('postID');
 deletePost(postID);
 // setTimeout(reloadPosts('mine'), 1000);
-getMyPosts();
-$('main').prepend(bioHTML);
 $(this).closest('comment').remove();
+$('main').children().remove();
+// getMyPosts();
+// $('main').prepend(bioHTML);
 })
