@@ -11,22 +11,8 @@ function getPosts(){
     crossDomain: true
   }).done(function(result) {
     $(result).each(function(index, post) {
-      var postHtml = `
-      <article class="d-flex composeContainer" postID="${post.idPublicacion}" idUsuario="${post.idUsuario}">
-      <div class='d-flex'>
-      <span>${post.nombre}</span>
-      <datetime class='ms-auto'>${moment(post.fechaCreacion).calendar()}</datetime>
-      </div>
-      <p class="mb-0">${post.contenido}</p>
-      <section class="ms-auto gap-3">
-      ${post.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
-        <button class="deletePost"><i class="removeIcon bi bi-trash"></i></button>` : ''}
-        <button class="starPost">${post.cantidadLikes} <i class="${post.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
-      <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
-      </section>
-      </article>
-      `;
-      $('main').append(postHtml);
+      html = getHTML(post);
+      $('main').append(html);
     });
 
     // Asignar eventos después de agregar los elementos al DOM
@@ -96,24 +82,14 @@ function getFavoritePosts(){
     dataType: 'json',
     crossDomain: true
   }).done(function(result) {
-    $('main').append(`<article class="d-flex composeContainer">
+    $('main').append(`<article class="d-flex green-container">
       <span>Publicar</span>
       <textarea placeholder="Escribe lo que tengas en mente..." id="composeBox"></textarea>
       <button id="sendPost">Enviar <i class="bi bi-send-fill"></i></button>
     </article>`);
     $(result).each(function(index, post) {
-      var postHtml = `
-      <article class="d-flex composeContainer" postID="${post.idPublicacion}">
-      <span>${post.nombre}</span>
-      <p class="mb-0">${post.contenido}</p>
-      <section class="ms-auto">
-      <datetime class="me-3">${moment(post.fechaCreacion).subtract(6, 'days').calendar()}</datetime>
-      <button class="starPost">${post.cantidadLikes} <i class="starIcon bi bi-star-fill"></i></button>
-      <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
-      </section>
-      </article>
-      `;
-      $('main').append(postHtml);
+      let html = getHTML(post)
+      $('main').append(html);
     });
 
     // Asignar eventos después de agregar los elementos al DOM
@@ -228,22 +204,8 @@ function getMyPosts(){
     crossDomain: true
   }).done(function(result) {
     $(result).each(function(index, post) {
-      var postHtml = `
-      <article class="d-flex composeContainer" postID="${post.idPublicacion}" idUsuario="${post.idUsuario}">
-      <div class='d-flex'>
-      <span>${post.nombre}</span>
-      <datetime class='ms-auto'>${moment(post.fechaCreacion).calendar()}</datetime>
-      </div>
-      <p class="mb-0">${post.contenido}</p>
-      <section class="ms-auto gap-3">
-      ${post.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
-        <button class="deletePost"><i class="removeIcon bi bi-trash"></i></button>` : ''}
-        <button class="starPost">${post.cantidadLikes} <i class="${post.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
-      <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
-      </section>
-      </article>
-      `;
-      $('main').append(postHtml);
+      let html = getHTML(post)
+      $('main').append(html);
     });
 
     // Asignar eventos después de agregar los elementos al DOM
@@ -299,7 +261,7 @@ function deletePost(postId){
       text: "Publicacion eliminada exitosamente",
       icon: "success"
     });
-    reloadPosts();
+    // reloadPosts();
   }).fail(function(jqXHR, errorStatus, errorMsg) {
     console.error("Error: " + errorStatus + ", " + errorMsg);
     Swal.fire({
@@ -334,18 +296,10 @@ function getComments(postId){
     crossDomain: 'true',
   }).done(function (result){
     $(result).each(function(index, comment){
-      let commentHTML = `<section class="d-flex composeContainer mini comment" commentId="${comment.idComentario}">
-              <span>${comment.nombre}</span>
-              <p class="mb-0">${comment.contenido}</p>
-              <section class="ms-auto">
-              ${comment.idUsuario == matricula ? `<button class="editComment"><i class="editIcon bi bi-pencil"></i></button>
-                <button class="deleteComment"><i class="removeIcon bi bi-trash"></i></button>` : ''}
-                <button class="starPost">${comment.cantidadLikes} <i class=" starIcon bi bi-star"></i></button>
-              </section>
-            </section>`
-      $('main').children('article').append(commentHTML);
+      let html = getCommentHTML(comment)
+      $('main').children('article').append(html);
     })
-    $('main').children('article').append(postCommentHTML);
+    $('main').children('article').append(composeCommentHTML);
   })
 }
 // Obtener un post espeifico
@@ -358,22 +312,8 @@ function getPost(postId){
     crossDomain: 'true',
   }).done(function (result){
     $(result).each(function(index, post){
-      var postHtml = `
-      <article class="d-flex composeContainer" postID="${post.idPublicacion}" idUsuario="${post.idUsuario}">
-      <div class='d-flex'>
-      <span>${post.nombre}</span>
-      <datetime class='ms-auto'>${moment(post.fechaCreacion).calendar()}</datetime>
-      </div>
-      <p class="mb-0">${post.contenido}</p>
-      <section class="ms-auto gap-3">
-      ${post.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
-        <button class="deletePost"><i class="removeIcon bi bi-trash"></i></button>` : ''}
-        <button class="starPost">${post.cantidadLikes} <i class="${post.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
-      <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
-      </section>
-      </article>
-      `;
-      $('main').append(postHtml);
+      let html = getHTML(post); 
+      $('main').append(html);
     })
   })
 }
@@ -448,7 +388,8 @@ function deleteComment(commentId){
 
 // Plantillas
 
-var bioHTML = `<div class="profile-section composeContainer whitey">
+var bioHTML = `
+  <div class="profile-section green-container whitey">
   <div class="card roundie">
     <img src="assets/galaxy.png" alt="Foto de portada" class="img-fluid profileBanner" style="width: 100%; height: 200px; object-fit: cover;">
     <div class="profile-info text-center mt-3" style="height: 60px;">
@@ -466,14 +407,60 @@ var bioHTML = `<div class="profile-section composeContainer whitey">
   </div>
 </div>`
 
-var composeHTML = `<article class="d-flex composeContainer">
+var composeHTML = `<article class="d-flex green-container">
   <span>Publicar</span>
   <textarea placeholder="Escribe lo que tengas en mente..." id="composeBox"></textarea>
   <button id="sendPost">Enviar <i class="bi bi-send-fill"></i></button>
 </article>`
 
-var postCommentHTML = `<section class="d-flex composeContainer mini">
-              <span>Comentar</span>
-              <textarea placeholder="Escribe lo que tengas en mente..." id="composeBox"></textarea>
-              <button id="sendComment">Enviar <i class="bi bi-send-fill"></i></button>
-            </section>`
+var composeCommentHTML = `
+<section class="d-flex green-container mini">
+  <span>Comentar</span>
+  <textarea placeholder="Escribe lo que tengas en mente..." id="composeBox"></textarea>
+  <button id="sendComment">Enviar <i class="bi bi-send-fill"></i></button>
+  </section>`
+
+function getHTML(post){
+  let html = `
+    <article class="d-flex green-container" postID="${post.idPublicacion}" idUsuario="${post.idUsuario}">
+      <div class='d-flex'>
+        <span>${post.nombre}</span>
+      </div>
+      <div class='text-card'>
+        <p class="mb-0">${post.contenido}</p> 
+      </div>
+      <div class='date&options d-flex ms-3'>
+        <datetime class='mt-2 align-middle'>${moment(post.fechaCreacion).calendar()}</datetime>
+        <section class="ms-auto">
+        ${post.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
+        <button class="deletePost"><i class="removeIcon bi bi-trash"></i></button>` : ''}
+        <button class="starPost">${post.cantidadLikes} <i class="${post.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
+        <button class="commentPost"><a href="publicacion.html?postId=${post.idPublicacion}">${post.cantidadComentarios} <i class="commentIcon bi bi-chat"></a></i></button>
+        </section>
+      </div>
+    </article>
+      `
+      return html;
+}
+
+function getCommentHTML(comment){
+  let html = `
+    <section class='ms-4 mb-3 comment' commentId="${comment.idComentario}" idUsuario="${comment.idUsuario}">
+      <div class='d-flex'>
+        <span>${comment.nombre}</span>
+      </div>
+      <div class='text-card'>
+        <p class="mb-0">${comment.contenido}</p> 
+      </div>
+      <div class='date&options d-flex ms-3'>
+        <datetime class='mt-2 align-middle'>${moment(comment.fechaCreacion).calendar()}</datetime>
+        <section class="ms-auto">
+        ${comment.idUsuario == matricula ? `<button class="editPost"><i class="editIcon bi bi-pencil"></i></button>
+        <button class="deleteComment"><i class="removeIcon bi bi-trash"></i></button>` : ''}
+        <button class="starPost">${comment.cantidadLikes} <i class="${comment.likePropio ? `bi bi-star-fill` : `bi bi-star`}"></i></button>
+        </section>
+      </div>
+    </section>
+      `
+  return html;
+}
