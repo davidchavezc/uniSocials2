@@ -26,5 +26,6 @@ $(document).ready(function() {
     var postID = $(this).closest('article').attr('postID');
     $(this).closest('article').remove();
     deletePost(postID);
+    reloadPosts();
   });
 });

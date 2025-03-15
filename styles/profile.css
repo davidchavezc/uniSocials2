@@ -37,3 +37,6 @@ button:hover{
 .whitey{
   background-color: rgb(202, 228, 229);
 }
+h5{
+  font-weight: 700 !important;
+}
