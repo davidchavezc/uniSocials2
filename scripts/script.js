@@ -10,6 +10,7 @@ function getPosts(){
     dataType: 'json',
     crossDomain: true
   }).done(function(result) {
+    console.log(result.length)
     $(result).each(function(index, post) {
       html = getHTML(post);
       $('main').append(html);
