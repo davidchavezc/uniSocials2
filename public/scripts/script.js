@@ -1,7 +1,22 @@
 var matricula = 2177862;
-var apiKey = "43de612c-3ab2-4c5e-9695-89660336460a";
+var apiKey;
 var url = 'https://redsocial.luislepe.tech/api';
-moment.locale('es-MX');  
+// Get api key
+$.ajax({
+  url: '/api-key',
+  type: 'GET',
+  dataType: 'json',
+  async: false,
+  success: function(data) {
+    apiKey = data.apiKey;
+  },
+  error: function(jqXHR, errorStatus, errorMsg) {
+    console.error("Error fetching API key: " + errorStatus + ", " + errorMsg);
+  }
+});
+
+moment.locale('es-MX'); // Set moment locale
+
 // Obtener posts
 function getPosts(){
   $.ajax({
@@ -10,7 +25,6 @@ function getPosts(){
     dataType: 'json',
     crossDomain: true
   }).done(function(result) {
-    console.log(result.length)
     $(result).each(function(index, post) {
       html = getHTML(post);
       $('main').append(html);
