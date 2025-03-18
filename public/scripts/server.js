@@ -1,11 +1,15 @@
 const express = require('express');
 const path = require('path');
-require('dotenv').config();
+const cors = require('cors');
+require('dotenv').config({ path: path.join(__dirname, '../../credentials.env') });
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Enable CORS
+app.use(cors());
+
+app.use(express.static(path.join(__dirname, '../../public')));
 
 app.get('/api-key', (req, res) => {
   res.json({ apiKey: process.env.API_KEY });
